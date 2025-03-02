@@ -115,12 +115,6 @@ class CursorRegistration:
                 controller=self,  # Pass self instead of self.controller
                 translator=self.translator
             )
-
-            print(f"{Fore.CYAN}{EMOJI['WAIT']} {'请确认是否注册成功 (y/n):'}")
-            confirm = input().strip().lower()
-            if confirm != 'y':
-                print(f"{Fore.RED}{EMOJI['ERROR']} {'注册已取消'}{Style.RESET_ALL}")
-                return False
             
             if result:
                 # Use the returned browser instance to get account information
@@ -243,27 +237,20 @@ class CursorRegistration:
             return False
 
     def start(self):
-        # Update authentication information first
-        print(f"{Fore.CYAN}{EMOJI['KEY']} {self.translator.get('register.update_cursor_auth_info')}...{Style.RESET_ALL}")
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoMHx1c2VyXzAxSk5CMEZKS01NSk1BSjMwR0tHWDhWM1lKIiwidGltZSI6IjE3NDA5MDUxNDMiLCJyYW5kb21uZXNzIjoiZTdhZjkyZGEtZmE1ZC00ZjlkIiwiZXhwIjo0MzMyOTA1MTQzLCJpc3MiOiJodHRwczovL2F1dGhlbnRpY2F0aW9uLmN1cnNvci5zaCIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgb2ZmbGluZV9hY2Nlc3MiLCJhdWQiOiJodHRwczovL2N1cnNvci5jb20ifQ.wCqjlD-ctcICbJCYszXf_BXfYhhGvdaxXzVcBFm5Kx4"
-        if self.update_cursor_auth(email="qian256011wang066@163.com", access_token=token, refresh_token=token):
-            print(f"{Fore.GREEN}{EMOJI['SUCCESS']} {self.translator.get('register.cursor_auth_info_updated')}...{Style.RESET_ALL}")
-        else:
-            print(f"{Fore.RED}{EMOJI['ERROR']} {self.translator.get('register.cursor_auth_info_update_failed')}...{Style.RESET_ALL}")
-        # """Start Registration Process"""
-        # try:
-        #     if self.setup_email():
-        #         if self.register_cursor():
-        #             print(f"\n{Fore.GREEN}{EMOJI['DONE']} {self.translator.get('register.cursor_registration_completed')}...{Style.RESET_ALL}")
-        #             return True
-        #     return False
-        # finally:
-        #     # Close email tab
-        #     if hasattr(self, 'temp_email'):
-        #         try:
-        #             self.temp_email.close()
-        #         except:
-        #             pass
+        """Start Registration Process"""
+        try:
+            if self.setup_email():
+                if self.register_cursor():
+                    print(f"\n{Fore.GREEN}{EMOJI['DONE']} {self.translator.get('register.cursor_registration_completed')}...{Style.RESET_ALL}")
+                    return True
+            return False
+        finally:
+            # Close email tab
+            if hasattr(self, 'temp_email'):
+                try:
+                    self.temp_email.close()
+                except:
+                    pass
 
     def update_cursor_auth(self, email=None, access_token=None, refresh_token=None):
         """Convenient function to update Cursor authentication information"""

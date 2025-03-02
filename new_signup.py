@@ -287,21 +287,18 @@ def handle_verification_code(browser_tab, email_tab, controller, email, password
                 print(f"{translator.get('register.verification_success')}")
                 time.sleep(3)
                 
-                # 处理最后一次 Turnstile 验证
-                if handle_turnstile(browser_tab, translator):
-                    if translator:
-                        print(f"{translator.get('register.verification_success')}")
-                    else:
-                        print(f"{translator.get('register.verification_success')}")
-                    time.sleep(2)
+                print(f"{Fore.CYAN}{EMOJI['WAIT']} {'请确认是否注册成功 (y/n):'}")
+                confirm = input().strip().lower()
+                if confirm != 'y':
+                    print(f"{Fore.RED}{EMOJI['ERROR']} {'注册已取消'}{Style.RESET_ALL}")
+                    return False
+                
+                # 访问设置页面
+                print(f"{translator.get('register.visiting_url')}: https://www.cursor.com/settings")
+                browser_tab.get("https://www.cursor.com/settings")
+                time.sleep(3)  # 等待页面加载
+                return True, browser_tab
                     
-                    # 访问设置页面
-                    print(f"{translator.get('register.visiting_url')}: https://www.cursor.com/settings")
-                    browser_tab.get("https://www.cursor.com/settings")
-                    time.sleep(3)  # 等待页面加载
-                    return True, browser_tab
-                    
-                return False, None
                 
         # 自动获取验证码逻辑
         elif email_tab:
