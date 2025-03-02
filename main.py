@@ -28,7 +28,8 @@ EMOJI = {
     "MENU": "📋",
     "ARROW": "➜",
     "LANG": "🌐",
-    "UPDATE": "🔄"
+    "UPDATE": "🔄",
+    "KEY": "🔑"
 }
 
 class Translator:
@@ -112,6 +113,7 @@ def print_menu():
     print(f"{Fore.GREEN}4{Style.RESET_ALL}. {EMOJI['ERROR']} {translator.get('menu.quit')}")
     print(f"{Fore.GREEN}5{Style.RESET_ALL}. {EMOJI['LANG']} {translator.get('menu.select_language')}")
     print(f"{Fore.GREEN}6{Style.RESET_ALL}. {EMOJI['UPDATE']} {translator.get('menu.disable_auto_update')}")
+    print(f"{Fore.GREEN}7{Style.RESET_ALL}. {EMOJI['KEY']} {translator.get('menu.update_token')}")
     print(f"{Fore.YELLOW}{'─' * 40}{Style.RESET_ALL}")
 
 def select_language():
@@ -142,7 +144,8 @@ def main():
     
     while True:
         try:
-            choice = input(f"\n{EMOJI['ARROW']} {Fore.CYAN}{translator.get('menu.input_choice', choices='0-6')}: {Style.RESET_ALL}")
+            choice = input(f"\n{EMOJI['ARROW']} {Fore.CYAN}{translator.get('menu.input_choice', choices='0-7')}: {Style.RESET_ALL}")
+
 
             if choice == "0":
                 print(f"\n{Fore.YELLOW}{EMOJI['INFO']} {translator.get('menu.exit')}...{Style.RESET_ALL}")
@@ -171,6 +174,10 @@ def main():
             elif choice == "6":
                 import disable_auto_update
                 disable_auto_update.run(translator)
+                print_menu()
+            elif choice == "7":
+                import token_updater
+                token_updater.main(translator)
                 print_menu()
             else:
                 print(f"{Fore.RED}{EMOJI['ERROR']} {translator.get('menu.invalid_choice')}{Style.RESET_ALL}")

@@ -4,15 +4,16 @@
         "exit": "Exit Program",
         "reset": "Reset Machine ID",
         "register": "Register New Cursor Account",
-        "register_manual": "Register Cursor with Custom Email",
-        "quit": "Close Cursor Application",
+        "register_manual": "Register with Custom Email",
+        "quit": "Quit Cursor Application",
         "select_language": "Change Language",
         "input_choice": "Please enter your choice ({choices})",
-        "invalid_choice": "Invalid selection. Please enter a number from {choices}",
-        "program_terminated": "Program was terminated by user",
-        "error_occurred": "An error occurred: {error}. Please try again",
-        "press_enter": "Press Enter to Exit",
-        "disable_auto_update": "Disable Cursor Auto-Update"
+        "invalid_choice": "Invalid choice, please enter a number in the range {choices}",
+        "program_terminated": "Program terminated by user",
+        "error_occurred": "An error occurred: {error}, please try again",
+        "press_enter": "Press Enter to exit",
+        "disable_auto_update": "Disable Cursor Auto Update",
+        "update_token": "Update Cursor Token"
     },
     "languages": {
         "en": "English",
@@ -234,5 +235,17 @@
         "directory_removed": "Directory Removed",
         "creating_block_file": "Creating Block File",
         "block_file_created": "Block File Created"
+    },
+    "token_updater": {
+        "title": "Cursor Token Update Tool",
+        "updating_token": "Updating Token",
+        "token_updated": "Token updated successfully",
+        "token_update_failed": "Token update failed",
+        "error": "An error occurred: {error}",
+        "enter_email": "Please enter your email address:",
+        "enter_token": "Please enter your access token:",
+        "invalid_email": "Invalid email address",
+        "invalid_token": "Invalid access token",
+        "press_enter": "Press Enter to exit"
     }
 }

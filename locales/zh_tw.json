@@ -1,18 +1,19 @@
 {
     "menu": {
         "title": "可用選項",
-        "exit": "退出程式",
-        "reset": "重置機器識別碼",
-        "register": "註冊新 Cursor 帳號",
-        "register_manual": "使用自訂郵箱註冊",
-        "quit": "關閉 Cursor 應用程式",
-        "select_language": "變更語言",
+        "exit": "退出程序",
+        "reset": "重置機器標識",
+        "register": "註冊新 Cursor 賬號",
+        "register_manual": "使用自定義郵箱註冊",
+        "quit": "關閉 Cursor 應用",
+        "select_language": "更改語言",
         "input_choice": "請輸入您的選擇 ({choices})",
         "invalid_choice": "選擇無效，請輸入 {choices} 範圍內的數字",
-        "program_terminated": "程式已被使用者終止",
+        "program_terminated": "程序已被用戶終止",
         "error_occurred": "發生錯誤：{error}，請重試",
-        "press_enter": "按返回鍵退出",
-        "disable_auto_update": "停用 Cursor 自動更新"
+        "press_enter": "按回車鍵退出",
+        "disable_auto_update": "禁用 Cursor 自動更新",
+        "update_token": "更新 Cursor Token"
     },
     "languages": {
         "en": "English",
@@ -212,5 +213,17 @@
         "directory_removed": "目錄已刪除",
         "creating_block_file": "創建阻止文件",
         "block_file_created": "阻止文件已創建"
+    },
+    "token_updater": {
+        "title": "Cursor Token 更新工具",
+        "updating_token": "正在更新 Token",
+        "token_updated": "Token 更新成功",
+        "token_update_failed": "Token 更新失敗",
+        "error": "發生錯誤: {error}",
+        "enter_email": "請輸入郵箱地址:",
+        "enter_token": "請輸入訪問令牌:",
+        "invalid_email": "無效的郵箱地址",
+        "invalid_token": "無效的訪問令牌",
+        "press_enter": "按回車鍵退出"
     }
 } 
