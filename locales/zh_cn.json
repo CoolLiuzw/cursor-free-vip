@@ -122,6 +122,7 @@
         "set_password": "设置密码",
         "basic_info_submitted": "基本信息提交完成",
         "cursor_auth_info_updated": "Cursor 认证信息更新成功",
+        "cursor_only_save": "Cursor 仅保存",
         "cursor_auth_info_update_failed": "Cursor 认证信息更新失败",
         "reset_machine_id": "重置机器ID",
         "account_info_saved": "账户信息已保存",

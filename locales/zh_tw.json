@@ -103,6 +103,7 @@
         "set_password": "設置密碼",
         "basic_info_submitted": "基本信息提交完成",
         "cursor_auth_info_updated": "Cursor 認證信息更新成功",
+        "cursor_only_save": "Cursor 僅保存",
         "cursor_auth_info_update_failed": "Cursor 認證信息更新失敗",
         "reset_machine_id": "重置機器ID",
         "account_info_saved": "賬戶信息已保存",

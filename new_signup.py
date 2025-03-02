@@ -515,7 +515,7 @@ def main(email=None, password=None, first_name=None, last_name=None, email_tab=N
             print(f"{Fore.CYAN}{translator.get('register.waiting_for_page_load')}{Style.RESET_ALL}")
         else:
             print("等待页面加载...")
-        time.sleep(5)
+        time.sleep(2)
         
         # 如果没有提供账号信息，则生成随机信息
         if not all([email, password, first_name, last_name]):

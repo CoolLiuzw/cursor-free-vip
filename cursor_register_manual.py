@@ -115,6 +115,12 @@ class CursorRegistration:
                 controller=self,  # Pass self instead of self.controller
                 translator=self.translator
             )
+
+            print(f"{Fore.CYAN}{EMOJI['WAIT']} {'请确认是否注册成功 (y/n):'}")
+            confirm = input().strip().lower()
+            if confirm != 'y':
+                print(f"{Fore.RED}{EMOJI['ERROR']} {'注册已取消'}{Style.RESET_ALL}")
+                return False
             
             if result:
                 # Use the returned browser instance to get account information
@@ -195,21 +201,30 @@ class CursorRegistration:
             print(f"{Fore.RED}{EMOJI['ERROR']} {self.translator.get('register.account_error', error=str(e))}{Style.RESET_ALL}")
             return False
 
-    def _save_account_info(self, token, total_usage):
-        """Save Account Information to File"""
+    def _save_account_info(self, token, total_usage, only_save=True):
+        """Save Account Information to File
+        
+        Args:
+            token (str): The authentication token
+            total_usage (str): The usage limit
+            only_save (bool, optional): If True, only save account info to file without updating auth or resetting machine ID. Defaults to False.
+        """
         try:
-            # Update authentication information first
-            print(f"{Fore.CYAN}{EMOJI['KEY']} {self.translator.get('register.update_cursor_auth_info')}...{Style.RESET_ALL}")
-            if self.update_cursor_auth(email=self.email_address, access_token=token, refresh_token=token):
-                print(f"{Fore.GREEN}{EMOJI['SUCCESS']} {self.translator.get('register.cursor_auth_info_updated')}...{Style.RESET_ALL}")
-            else:
-                print(f"{Fore.RED}{EMOJI['ERROR']} {self.translator.get('register.cursor_auth_info_update_failed')}...{Style.RESET_ALL}")
+            if not only_save:
+                # Update authentication information first
+                print(f"{Fore.CYAN}{EMOJI['KEY']} {self.translator.get('register.update_cursor_auth_info')}...{Style.RESET_ALL}")
+                if self.update_cursor_auth(email=self.email_address, access_token=token, refresh_token=token):
+                    print(f"{Fore.GREEN}{EMOJI['SUCCESS']} {self.translator.get('register.cursor_auth_info_updated')}...{Style.RESET_ALL}")
+                else:
+                    print(f"{Fore.RED}{EMOJI['ERROR']} {self.translator.get('register.cursor_auth_info_update_failed')}...{Style.RESET_ALL}")
 
-            # Reset machine ID
-            print(f"{Fore.CYAN}{EMOJI['UPDATE']} {self.translator.get('register.reset_machine_id')}...{Style.RESET_ALL}")
-            resetter = MachineIDResetter(self.translator)  # Create instance with translator
-            if not resetter.reset_machine_ids():  # Call reset_machine_ids method directly
-                raise Exception("Failed to reset machine ID")
+                # Reset machine ID
+                print(f"{Fore.CYAN}{EMOJI['UPDATE']} {self.translator.get('register.reset_machine_id')}...{Style.RESET_ALL}")
+                resetter = MachineIDResetter(self.translator)  # Create instance with translator
+                if not resetter.reset_machine_ids():  # Call reset_machine_ids method directly
+                    raise Exception("Failed to reset machine ID")
+            else:
+                print(f"{Fore.GREEN}{EMOJI['SUCCESS']} {self.translator.get('register.cursor_only_save')}...{Style.RESET_ALL}")
             
             # Save account information to file
             with open('cursor_accounts.txt', 'a', encoding='utf-8') as f:
@@ -251,7 +266,7 @@ class CursorRegistration:
 def main(translator=None):
     """Main function to be called from main.py"""
     print(f"\n{Fore.CYAN}{'='*50}{Style.RESET_ALL}")
-    print(f"{Fore.CYAN}{EMOJI['START']} {translator.get('register.title')}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{EMOJI['START']} {translator.get('register.title') if translator else 'Cursor Registration'}{Style.RESET_ALL}")
     print(f"{Fore.CYAN}{'='*50}{Style.RESET_ALL}")
 
     registration = CursorRegistration(translator)

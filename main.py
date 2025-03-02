@@ -34,76 +34,9 @@ EMOJI = {
 class Translator:
     def __init__(self):
         self.translations = {}
-        self.current_language = self.detect_system_language()  # 使用正确的方法名
+        self.current_language = "zh_cn"
         self.fallback_language = 'en'  # Fallback language if translation is missing
         self.load_translations()
-    
-    def detect_system_language(self):
-        """Detect system language and return corresponding language code"""
-        try:
-            system = platform.system()
-            
-            if system == 'Windows':
-                return self._detect_windows_language()
-            else:
-                return self._detect_unix_language()
-                
-        except Exception as e:
-            print(f"{Fore.YELLOW}{EMOJI['INFO']} Failed to detect system language: {e}{Style.RESET_ALL}")
-            return 'en'
-    
-    def _detect_windows_language(self):
-        """Detect language on Windows systems"""
-        try:
-            # 确保我们在 Windows 上
-            if platform.system() != 'Windows':
-                return 'en'
-                
-            # 获取键盘布局
-            user32 = ctypes.windll.user32
-            hwnd = user32.GetForegroundWindow()
-            threadid = user32.GetWindowThreadProcessId(hwnd, 0)
-            layout_id = user32.GetKeyboardLayout(threadid) & 0xFFFF
-            
-            # Map language ID to our language codes
-            language_map = {
-                0x0409: 'en',      # English
-                0x0404: 'zh_tw',   # Traditional Chinese
-                0x0804: 'zh_cn',   # Simplified Chinese
-            }
-            
-            return language_map.get(layout_id, 'en')
-        except:
-            return self._detect_unix_language()
-    
-    def _detect_unix_language(self):
-        """Detect language on Unix-like systems (Linux, macOS)"""
-        try:
-            # Get the system locale
-            system_locale = locale.getdefaultlocale()[0]
-            if not system_locale:
-                return 'en'
-            
-            system_locale = system_locale.lower()
-            
-            # Map locale to our language codes
-            if system_locale.startswith('zh_tw') or system_locale.startswith('zh_hk'):
-                return 'zh_tw'
-            elif system_locale.startswith('zh_cn'):
-                return 'zh_cn'
-            elif system_locale.startswith('en'):
-                return 'en'
-            
-            # Try to get language from LANG environment variable as fallback
-            env_lang = os.getenv('LANG', '').lower()
-            if 'tw' in env_lang or 'hk' in env_lang:
-                return 'zh_tw'
-            elif 'cn' in env_lang:
-                return 'zh_cn'
-            
-            return 'en'
-        except:
-            return 'en'
     
     def load_translations(self):
         """Load all available translations"""

@@ -122,6 +122,7 @@
         "set_password": "Set Password",
         "basic_info_submitted": "Basic Info Submitted",
         "cursor_auth_info_updated": "Cursor Auth Info Updated",
+        "cursor_only_save": "Cursor Only Save",
         "cursor_auth_info_update_failed": "Cursor Auth Info Update Failed",
         "reset_machine_id": "Reset Machine ID",
         "account_info_saved": "Account Info Saved",
